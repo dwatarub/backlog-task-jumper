@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Backlog Task Jumper",
+  "name": "Backlog Task Jumper Ex",
   "version": "1.0.0",
   "description": "Quickly open Backlog issues by issue number.",
   "content_scripts": [
@@ -12,6 +12,5 @@
       "js": ["content.js"],
       "css": ["style.css"]
     }
-  ],
-
+  ]
 }
