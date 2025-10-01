@@ -20,6 +20,16 @@ function showTaskInput() {
   document.body.appendChild(input);
   input.focus();
 
+  let isRemoving = false;
+
+  const removeInput = () => {
+    if (isRemoving) return;
+    isRemoving = true;
+    if (document.body.contains(input)) {
+      document.body.removeChild(input);
+    }
+  };
+
   input.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
@@ -35,22 +45,13 @@ function showTaskInput() {
           }
         }
       }
-      if (document.body.contains(input)) {
-        document.body.removeChild(input);
-      }
+      removeInput();
     } else if (event.key === 'Escape') {
-      if (document.body.contains(input)) {
-        document.body.removeChild(input);
-      }
+      removeInput();
     }
   });
 
-  input.addEventListener('blur', () => {
-    // Remove the input if it loses focus
-    if (document.body.contains(input)) {
-      document.body.removeChild(input);
-    }
-  });
+  input.addEventListener('blur', removeInput);
 }
 
 function getProjectKey() {
