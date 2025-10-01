@@ -34,6 +34,7 @@ function showTaskInput() {
             window.location.href = url;
           }
         }
+      }
       if (document.body.contains(input)) {
         document.body.removeChild(input);
       }
