@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Backlog Task Jumper",
+  "version": "1.0.0",
+  "description": "Quickly open Backlog issues by issue number.",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.backlog.jp/*",
+        "https://*.backlog.com/*"
+      ],
+      "js": ["content.js"],
+      "css": ["style.css"]
+    }
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  }
+}
