@@ -50,15 +50,37 @@ function showTaskInput() {
 }
 
 function getProjectKey() {
-  // URL path is like /projects/PROJECT_KEY or /view/PROJECT_KEY-123
   const path = window.location.pathname;
-  const projectMatch = path.match(/^\/projects\/([^\/]+)/);
-  if (projectMatch) {
-    return projectMatch[1];
+
+  // Pattern 1: /projects/PROJECT_KEY/...
+  let match = path.match(/^\/projects\/([^\/?#]+)/);
+  if (match) {
+    return match[1];
   }
-  const viewMatch = path.match(/^\/view\/([^\-]+)-\d+/);
-  if (viewMatch) {
-    return viewMatch[1];
+
+  // Pattern 2: /view/PROJECT_KEY-123
+  match = path.match(/^\/view\/([^\-]+)-\d+/);
+  if (match) {
+    return match[1];
   }
+
+  // Pattern 3: Search in the DOM for a link to the project home, e.g., in the header.
+  const projectLink = document.querySelector('a[href*="/projects/"]');
+  if (projectLink) {
+    match = projectLink.pathname.match(/^\/projects\/([^\/?#]+)/);
+    if (match) {
+      return match[1];
+    }
+  }
+  
+  // Pattern 4: Look for the "Add Issue" link.
+  const addIssueLink = document.querySelector('a[href*="/add/"]');
+  if (addIssueLink) {
+    match = addIssueLink.pathname.match(/^\/add\/([^\/?#]+)/);
+    if (match) {
+      return match[1];
+    }
+  }
+
   return null;
 }
