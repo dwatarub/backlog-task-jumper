@@ -34,10 +34,13 @@ function showTaskInput() {
             window.location.href = url;
           }
         }
+      if (document.body.contains(input)) {
+        document.body.removeChild(input);
       }
-      document.body.removeChild(input);
     } else if (event.key === 'Escape') {
-      document.body.removeChild(input);
+      if (document.body.contains(input)) {
+        document.body.removeChild(input);
+      }
     }
   });
 
